@@ -98,8 +98,15 @@ const RootQueryType = new GraphQLObjectType({
             id : { type : GraphQLNonNull(GraphQLInt)}
         },
         resolve : (parent, args) => books.find(book => book.id  === args.id)
-        
-        
+      },
+      //Query individual author by a unique property, which is id
+      author:{
+          type : AuthorType, 
+          description : 'A single author',
+          args : {
+              id : { type : GraphQLNonNull(GraphQLInt)},
+          },
+          resolve : (parent, args) => authors.find(author => author.id === args.id)   
       }
   })                                           
 })
