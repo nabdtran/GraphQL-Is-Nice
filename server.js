@@ -36,4 +36,17 @@ const books = [
 ]
 
 
+//Graphiql will render this schema which can be used to query or mutate data
+const schema = new GraphQLSchema({
+    query: RootQueryType,
+    mutation: RootMutationType
+  });
+
+
+//Use graphiql interface to query and mutate data following the schema above at /graphql endpoint
+app.use('/graphql', graphqlHTTP({
+    schema:schema,
+    graphiql:true
+}));
+
 app.listen(5000, () => console.log('Server Running'));
