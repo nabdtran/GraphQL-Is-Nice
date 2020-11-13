@@ -37,18 +37,14 @@ const books = [
 
 //Root Query
 const RootQueryType = new GraphQLObjectType({ 
-  name : 'RootQuery',
-  description : "The root of all your queries",
+  name : 'Queries',
+  description : "Queries for books and authors, in their singular forms too can be found in me",
   fields : () => ({
-      message : {
-          type : GraphQLString,
-          description : "I describe the message",
-          resolve : () => "The message is that I am now learning graphql"
-          },
-      id : {
-          type : GraphQLNonNull(GraphQLInt),
-          description : "I tell you the ID",
-          resolve : () => 1
+      //Querying all books returns a list of all the books conforming to the book type
+      books : {
+          type : GraphQLList(BookType),
+          description : "Lists all the books that can be queried",
+          resolve : () => books
       }
   })                                           
 })
