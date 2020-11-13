@@ -35,11 +35,29 @@ const books = [
 	{ id: 8, name: 'Beyond the Shadows', authorId: 3 }
 ]
 
+//Root Query
+const RootQueryType = new GraphQLObjectType({ 
+  name : 'RootQuery',
+  description : "The root of all your queries",
+  fields : () => ({
+      message : {
+          type : GraphQLString,
+          description : "I describe the message",
+          resolve : () => "The message is that I am now learning graphql"
+          },
+      id : {
+          type : GraphQLNonNull(GraphQLInt),
+          description : "I tell you the ID",
+          resolve : () => 1
+      }
+  })                                           
+})
 
 //Graphiql will render this schema which can be used to query or mutate data
 const schema = new GraphQLSchema({
+    //We can basically only query and mutate(change) data so those are the keys of our schema
     query: RootQueryType,
-    mutation: RootMutationType
+    // mutation: RootMutationType
   });
 
 
