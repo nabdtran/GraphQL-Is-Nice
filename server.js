@@ -59,6 +59,12 @@ const RootQueryType = new GraphQLObjectType({
           description : "Lists all the books that can be queried",
           //Querying for books should return all books that fit the BookType Specification
           resolve : () => books
+      },
+      //Querying all authors returns a list of all the authors conforming to the author type
+      authors: {
+        type: new GraphQLList(AuthorType),
+        description: 'List of all authors that can be queried',
+        resolve: () => authors
       }
   })                                           
 })
