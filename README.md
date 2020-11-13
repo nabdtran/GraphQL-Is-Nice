@@ -50,7 +50,6 @@
   
  - Require graphql and express-graphql packages for querying the Graphql way 
   
-  |
 - Simple express server set up   :     a6eeb781726fc635e4a061bdbe3ff47446950303(Commit ID) 
 
 To start from the very beginning, run this command 
@@ -58,10 +57,10 @@ To start from the very beginning, run this command
 As you can see this long string of characters is the unique id generated for every commit message. Running the above command takes you back to the very beginning of the code. Once you understand the given version, run the aboe command again, this time with the next commit ID.
 
 I ensured that the code in each version is minimal to promote understanding. I also added a lot of comments just to improve understanding.
-
+![commits](https://github.com/KarenEfereyan/GraphQL-Is-Nice/blob/master/commits.png)
 
 Cc : If you found this repository helpful give me a shoutout on [twitter](https://twitter.com/EfereyanK)
 Don't forget also to star the repo!! Many thanks
   
 Here is how graphiql looks
-![graphiql]('img.png')
+![graphiql](https://github.com/KarenEfereyan/GraphQL-Is-Nice/blob/master/img.png) !
