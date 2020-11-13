@@ -35,6 +35,19 @@ const books = [
 	{ id: 8, name: 'Beyond the Shadows', authorId: 3 }
 ]
 
+//The Specification for a book
+const BookType = new GraphQLObjectType({
+    name : 'Book',
+    description : "A Book That Has an Author",
+    fields : () =>  ({
+        //All the attributes of the book must not be null
+      id : { type : GraphQLNonNull(GraphQLInt)} ,
+      name : { type : GraphQLNonNull(GraphQLString)},
+      authorId : {type : GraphQLNonNull(GraphQLInt)},
+       
+    })
+})
+
 //Root Query
 const RootQueryType = new GraphQLObjectType({ 
   name : 'Queries',
@@ -44,6 +57,7 @@ const RootQueryType = new GraphQLObjectType({
       books : {
           type : GraphQLList(BookType),
           description : "Lists all the books that can be queried",
+          //Querying for books should return all books that fit the BookType Specification
           resolve : () => books
       }
   })                                           
