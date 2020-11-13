@@ -72,7 +72,7 @@ const AuthorType = new GraphQLObjectType({
     })
 });
 
-//Root Query
+//Make Queries
 const RootQueryType = new GraphQLObjectType({ 
   name : 'Queries',
   description : "Queries for books and authors, in their singular forms too can be found in me",
@@ -109,13 +109,38 @@ const RootQueryType = new GraphQLObjectType({
           resolve : (parent, args) => authors.find(author => author.id === args.id)   
       }
   })                                           
+});
+
+//Make Changes/Mutate Date(Similar to CRUD in REST)
+const RootMutationType = new GraphQLObjectType({
+   name : "Mutations",
+   description : "Make changes to all your data",
+   fields: () => ({
+      addBook : {
+          type : BookType,
+          description : "Add a new Book",
+          args : {
+              name : {type : GraphQLNonNull(GraphQLString)},
+              authorId :{ type : GraphQLNonNull(GraphQLInt)}
+          }, 
+          resolve : (parent, args) =>{
+              const addedBook = {
+                  id: books.length + 1, 
+                  name : args.name, 
+                  authorId : args.authorId
+              }
+              books.push(addedBook);
+              return addedBook
+          } 
+      } 
+   }) 
 })
 
 //Graphiql will render this schema which can be used to query or mutate data
 const schema = new GraphQLSchema({
     //We can basically only query and mutate(change) data so those are the keys of our schema
     query: RootQueryType,
-    // mutation: RootMutationType
+    mutation: RootMutationType
   });
 
 
