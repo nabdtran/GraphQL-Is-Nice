@@ -60,8 +60,15 @@ const AuthorType = new GraphQLObjectType({
     description : "An Author That Has a Book",
     fields : () => ({
         id : {type : GraphQLNonNull(GraphQLInt)},
-        name : {type : GraphQLNonNull(GraphQLString)}
-        
+        name : {type : GraphQLNonNull(GraphQLString)},
+        //Query all books written by the author
+        books: {
+            type: new GraphQLList(BookType),
+            resolve: (author) => {
+                //Filter books to find one or more that have this author
+              return books.filter(book => book.authorId === author.id)
+            }
+        }   
     })
 });
 
