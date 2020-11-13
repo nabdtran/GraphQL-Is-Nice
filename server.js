@@ -35,6 +35,7 @@ const books = [
 	{ id: 8, name: 'Beyond the Shadows', authorId: 3 }
 ]
 
+
 //The Specification for a book
 const BookType = new GraphQLObjectType({
     name : 'Book',
@@ -141,7 +142,7 @@ const RootMutationType = new GraphQLObjectType({
           args : {
               name : { type : GraphQLNonNull(GraphQLString)}
           },
-          resolve : (parent, args) =>{
+          resolve : (parent, args) => {
               const newAuthor = {
                   id : authors.length + 1,
                   name :args.name,   
@@ -149,7 +150,33 @@ const RootMutationType = new GraphQLObjectType({
               authors.push(newAuthor)
               return newAuthor
           }
+      },
+      //Delete Author
+      deleteAuthor : {
+          type : AuthorType,
+          description: "Delete an author",
+          args: {
+              id : {type :GraphQLNonNull(GraphQLInt)}
+          }, 
+          resolve : (parent, args) => {
+             return  authors.filter((author) => author.id === args.id)
+          }
       }
+    //   deleteBook : {
+    //       type : BookType,
+    //       description : "Delete a book",
+    //       args : {
+    //           id : {type: GraphQLNonNull(GraphQLInt)}
+    //       },
+    //       resolve :(parent, args) =>{
+    //           return books.filter((book) => book.id === args.id )
+    //         //   const newBooks = books.filter(() => {
+    //         //       book => book.id === args.id
+    //         //    })
+    //         //   console.log("New Books", newBooks);
+    //         //   return newBooks;
+    //       }   
+    //   },
    }) 
 })
 
